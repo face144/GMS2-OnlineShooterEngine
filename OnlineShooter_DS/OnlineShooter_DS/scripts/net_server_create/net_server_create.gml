@@ -13,7 +13,7 @@ function net_server_create() {
 
 	//Sets data types and size.
 	var buffSize = 1024;
-	var buffType = buffer_fixed;
+	var buffType = buffer_grow;
 	var buffAlign = 1;
 
 	//Defines global variables to store data.

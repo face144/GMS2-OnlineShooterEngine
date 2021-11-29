@@ -1,0 +1,1 @@
+wjs_devconsole_destroy();

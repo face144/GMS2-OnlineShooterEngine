@@ -16,8 +16,50 @@ function net_server_events() {
 			//Sends the time back to the player.
 			net_write_client(socket,buffer_u8,0,buffer_u32,clientTime);
 		break;
-	
+		
+		case 1: //Movement
+			//Read the ID
+			var client_ID = buffer_read(data,buffer_s32);
+			//Decodes the movement type
+			switch(buffer_read(data,buffer_u8)) {
+				
+				case 1:
+					with (client_ID)
+						x += oPlayer.movement_speed;
+				break;
+				
+				case 2:
+					with (client_ID)
+						x -= oPlayer.movement_speed;
+				break;
+				
+				case 3:
+					with (client_ID)
+						y -= oPlayer.movement_speed;
+				break;
+				
+				case 4:
+					with (client_ID)
+						y += oPlayer.movement_speed;
+				break;				
+				
+			}
+		break;
+			
+		/*case 2: //Disconnect signal
+			var client_ID = buffer_read(data,buffer_s32);
+			with(client_ID) {
+				instance_destroy();
+				show_debug_message("Player with ID " + string(client_ID) + " has disconnected.");
+			}
+			//Gets the socket of the player.
+			var socket = ds_map_find_value(async_load,"socket");
+			//Finds the position of the socket in the list.
+			var socketPos = ds_list_find_index(sockets,socket);
+			//Deletes the socket from the connected list.
+			ds_list_delete(sockets,socketPos);
+			ds_list_delete(ids,socketPos)
+		break;*/
+			
 	}
-
-
 }

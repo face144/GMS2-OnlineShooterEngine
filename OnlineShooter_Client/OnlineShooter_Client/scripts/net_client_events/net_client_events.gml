@@ -16,7 +16,7 @@ function net_client_events() {
 		break;
 		
 		case 1: //Recieving ID
-			oClient.unique_id = buffer_read(data,buffer_u8);
+			oClient.unique_id = buffer_read(data,buffer_s32);
 			oClient.spawn_allowed = true;
 		break;
 	

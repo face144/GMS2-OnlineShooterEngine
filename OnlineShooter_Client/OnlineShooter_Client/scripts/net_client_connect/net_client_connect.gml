@@ -15,7 +15,7 @@ function net_client_connect() {
 	clientConnected = network_connect(clientSocket,serverIp,argument[1]);
 
 	//Sets the global buffer for the client.
-	buffer = buffer_create(1024,buffer_fixed,1);
+	buffer = buffer_create(1024,buffer_grow,1);
 
 
 }

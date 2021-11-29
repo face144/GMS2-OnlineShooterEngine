@@ -15,7 +15,7 @@ function net_server_connections() {
 			//Assigning the id of the client and adding it to the list of all IDs.
 			var client_id = instance_create_layer(1,1,"Instances",oPlayer);
 			ds_list_add(ids,client_id);
-			net_write_client(socket,buffer_u8,1,buffer_u8,client_id);
+			net_write_client(socket,buffer_u8,1,buffer_s32,client_id);
 			
 		#endregion
 		break;
@@ -26,9 +26,15 @@ function net_server_connections() {
 			var socket = ds_map_find_value(async_load,"socket");
 			//Finds the position of the socket in the list.
 			var socketPos = ds_list_find_index(sockets,socket);
+			var playerID = ds_list_find_value(ids,socketPos);
+			with(playerID) {
+				instance_destroy();
+				show_debug_message("Player with ID " + string(playerID) + " has disconnected.");
+			}
 			//Deletes the socket from the connected list.
 			ds_list_delete(sockets,socketPos);
-			ds_list_delete(ids,socketPos)
+			ds_list_delete(ids,socketPos);
+			
 		#endregion
 		break;
 	
