@@ -9,6 +9,11 @@ function net_server_destroy() {
 	//Deletes the list of connections.
 	ds_list_destroy(sockets);
 	
-	ds_list_destroy(ids);
+	ds_list_destroy(userID);
+
+	ds_list_destroy(userIP);
+	
+	file_text_write_string(log_file,string(current_hour) + ":" + string(current_minute)+ ":" + string(current_second) + " - " + "Server is offline.");
+	file_text_writeln(log_file);
 
 }

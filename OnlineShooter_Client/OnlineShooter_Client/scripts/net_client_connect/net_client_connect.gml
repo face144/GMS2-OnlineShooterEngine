@@ -13,7 +13,15 @@ function net_client_connect() {
 
 	//Checks whether the client is currently connected.
 	clientConnected = network_connect(clientSocket,serverIp,argument[1]);
-
+	if (clientConnected < 0) {
+		file_text_write_string(log_file, string(current_hour) + ":" + string(current_minute)+ ":" + string(current_second) + " - " + "Failed to connect to server.");
+		file_text_writeln(log_file);
+	
+	} else {
+		file_text_write_string(log_file, string(current_hour) + ":" + string(current_minute)+ ":" + string(current_second) + " - " + "Succesfully connected to the server\n");
+		file_text_writeln(log_file);
+	}
+	
 	//Sets the global buffer for the client.
 	buffer = buffer_create(1024,buffer_grow,1);
 

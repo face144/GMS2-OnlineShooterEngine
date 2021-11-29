@@ -17,10 +17,19 @@ function net_server_create() {
 	var buffAlign = 1;
 
 	//Defines global variables to store data.
-	globalvar server,sockets,buffer,ids;
+	globalvar server,sockets,buffer,userID,userIP;
 	server = network_create_server(netType,netPort,netPlayers);
 	sockets = ds_list_create();
-	ids = ds_list_create();
+	userID = ds_list_create();
+	userIP = ds_list_create();
 	buffer = buffer_create(buffSize,buffType,buffAlign);
 	
+	if (server < 0) {
+		file_text_write_string(log_file, string(current_hour) + ":" + string(current_minute)+ ":" + string(current_second) + " - " + "Error creating server.");
+		file_text_writeln(log_file);
+		return;
+	}
+	
+	file_text_write_string(log_file, string(current_hour) + ":" + string(current_minute)+ ":" + string(current_second) + " - " + "Server created.");
+	file_text_writeln(log_file);
 }

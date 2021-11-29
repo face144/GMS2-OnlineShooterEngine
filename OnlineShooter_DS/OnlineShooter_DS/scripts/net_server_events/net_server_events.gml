@@ -58,7 +58,7 @@ function net_server_events() {
 			var socketPos = ds_list_find_index(sockets,socket);
 			//Deletes the socket from the connected list.
 			ds_list_delete(sockets,socketPos);
-			ds_list_delete(ids,socketPos)
+			ds_list_delete(userID,socketPos)
 		break;*/
 			
 	}

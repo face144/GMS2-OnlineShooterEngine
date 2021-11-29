@@ -1,4 +1,4 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-ds_list_add(ids,id);
+ds_list_add(userID,id);

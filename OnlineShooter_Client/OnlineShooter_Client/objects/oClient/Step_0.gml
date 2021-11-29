@@ -8,6 +8,13 @@ if (spawn_allowed) {
 	spawn_allowed = false;
 }
 
+#region Movement
+
+file_text_write_string(log_file, string(current_hour) + ":" + string(current_minute)+ ":" + string(current_second) + " - " + 
+"Sending data to the server.");
+file_text_writeln(log_file);
+
+
 if (instance_exists(oPlayer)) {
 	if (keyboard_check(ord("D"))) {
 		net_write_server(buffer_u8,1,buffer_s32,oClient.unique_id,buffer_u8,1)
@@ -29,3 +36,13 @@ if (instance_exists(oPlayer)) {
 		oPlayer.y += oPlayer.movement_speed;
 	}
 }
+
+#endregion
+
+#region Disconnect
+
+if (keyboard_check_released(vk_escape)) {
+	room_goto(room_menu);
+}
+
+#endregion

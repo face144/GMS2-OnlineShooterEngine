@@ -13,6 +13,9 @@ function net_client_connections() {
 			//Find the start of the data.
 			buffer_seek(buffer,buffer_seek_start,0);
 			//Passes information into a script to process the data.
+			//Logger stuff
+			file_text_write_string(log_file, string(current_hour) + ":" + string(current_minute)+ ":" + string(current_second) + " - " + "Recieved data from the server");
+			file_text_writeln(log_file);
 			net_client_events(data);
 		#endregion
 		break;
