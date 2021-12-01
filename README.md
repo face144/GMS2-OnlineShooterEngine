@@ -1,6 +1,6 @@
 # Online Shooter
 
-This repository is a client-server engine for an online shooter game made with gamemaker studio 2.
+This repository is a client-server engine for an online shooter game made with Gamemaker Studio 2.
  
 	This engine is currently includes:
 		-Player unique id management (server and client side);
