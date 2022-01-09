@@ -10,7 +10,7 @@ function net_client_connect() {
 	serverPlayers = ds_list_create();
 	
 	//Connection key
-	connectionKey = 234730;
+	connectionKey = 23473;
 
 	//Sets the types of connection socket.
 	clientSocket = network_create_socket(network_socket_tcp);
@@ -23,6 +23,7 @@ function net_client_connect() {
 	if (clientConnected < 0) {
 		file_text_write_string(log_file, string(current_hour) + ":" + string(current_minute)+ ":" + string(current_second) + " - " + "Failed to connect to server.");
 		file_text_writeln(log_file);
+		show_message("Failed to connect to server.");
 	
 	} else {
 		file_text_write_string(log_file, string(current_hour) + ":" + string(current_minute)+ ":" + string(current_second) + " - " + "Succesfully connected to the server\n");
