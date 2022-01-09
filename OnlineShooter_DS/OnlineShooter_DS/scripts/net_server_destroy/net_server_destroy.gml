@@ -13,7 +13,9 @@ function net_server_destroy() {
 
 	ds_list_destroy(userIP);
 	
+	file_text_open_write(log_file)
 	file_text_write_string(log_file,string(current_hour) + ":" + string(current_minute)+ ":" + string(current_second) + " - " + "Server is offline.");
 	file_text_writeln(log_file);
+	file_text_close(log_file)
 
 }

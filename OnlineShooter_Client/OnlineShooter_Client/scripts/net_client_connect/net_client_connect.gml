@@ -3,7 +3,14 @@
 function net_client_connect() {
 
 	//Sets the variables to be globally recognized.
-	globalvar clientSocket,serverIp,clientConnected,buffer;
+	globalvar clientSocket,serverIp,clientConnected,buffer,localPlayers, serverPlayers, connectionKey;
+	
+	//Player list
+	localPlayers = ds_list_create();
+	serverPlayers = ds_list_create();
+	
+	//Connection key
+	connectionKey = 234730;
 
 	//Sets the types of connection socket.
 	clientSocket = network_create_socket(network_socket_tcp);
@@ -24,6 +31,9 @@ function net_client_connect() {
 	
 	//Sets the global buffer for the client.
 	buffer = buffer_create(1024,buffer_grow,1);
+	
+	//Send conection key
+	net_write_server(buffer_u8, 3, buffer_s16, connectionKey);
 
 
 }

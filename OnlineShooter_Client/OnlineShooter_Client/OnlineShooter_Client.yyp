@@ -1,8 +1,10 @@
 {
   "resources": [
+    {"id":{"name":"sEnemy","path":"sprites/sEnemy/sEnemy.yy",},"order":2,},
     {"id":{"name":"oClient","path":"objects/oClient/oClient.yy",},"order":0,},
     {"id":{"name":"net_client_connections","path":"scripts/net_client_connections/net_client_connections.yy",},"order":1,},
     {"id":{"name":"net_client_destroy","path":"scripts/net_client_destroy/net_client_destroy.yy",},"order":2,},
+    {"id":{"name":"oEnemy","path":"objects/oEnemy/oEnemy.yy",},"order":6,},
     {"id":{"name":"net_write_server","path":"scripts/net_write_server/net_write_server.yy",},"order":3,},
     {"id":{"name":"room_menu","path":"rooms/room_menu/room_menu.yy",},"order":2,},
     {"id":{"name":"sPlayer","path":"sprites/sPlayer/sPlayer.yy",},"order":0,},
@@ -10,8 +12,10 @@
     {"id":{"name":"net_client_events","path":"scripts/net_client_events/net_client_events.yy",},"order":2,},
     {"id":{"name":"oLogger","path":"objects/oLogger/oLogger.yy",},"order":4,},
     {"id":{"name":"net_client_connect","path":"scripts/net_client_connect/net_client_connect.yy",},"order":0,},
+    {"id":{"name":"oBullet","path":"objects/oBullet/oBullet.yy",},"order":5,},
     {"id":{"name":"room_client","path":"rooms/room_client/room_client.yy",},"order":1,},
     {"id":{"name":"oPlayer","path":"objects/oPlayer/oPlayer.yy",},"order":3,},
+    {"id":{"name":"sBullet","path":"sprites/sBullet/sBullet.yy",},"order":1,},
     {"id":{"name":"oMenu","path":"objects/oMenu/oMenu.yy",},"order":1,},
   ],
   "Options": [
@@ -61,7 +65,7 @@
   ],
   "IncludedFiles": [],
   "MetaData": {
-    "IDEVersion": "2.3.7.603",
+    "IDEVersion": "2.3.7.606",
   },
   "resourceVersion": "1.4",
   "name": "OnlineShooter_Client",

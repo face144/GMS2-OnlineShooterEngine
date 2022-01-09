@@ -10,15 +10,29 @@ function net_server_connections() {
 		#region Socket Connection
 			//Gets the socket of the player.
 			var socket = ds_map_find_value(async_load,"socket");
+			//Inform new player of existing users
+			//net_write_client(socket, )			
 			//Adds the socket to the list of connected sockets.
 			ds_list_add(sockets,socket);
-			//Assigning the id of the client and adding it to the list of all userID.
-			var client_id = instance_create_layer(1,1,"Instances",oPlayer);
+			//Assigning the id of the client and adding it to the list of all userIDs.
+			var client_id = instance_create_layer(1,1,"Instances",oPlayer)
 			ds_list_add(userID, client_id);
 			var ip_address = ds_map_find_value(async_load, "ip")
 			ds_list_add(userIP, ip_address)	
 			net_write_client(socket,buffer_u8,1,buffer_s32,client_id);
 			
+			for (var i = 0; i < ds_list_size(sockets); i++) {
+				
+				with(client_id)
+					net_write_client(ds_list_find_value(sockets, i), buffer_u8, 4, buffer_s32, id);
+			}
+			
+			for (var i = 0; i < ds_list_size(sockets); i++) { //Go through all sockets
+			
+				with (ds_list_find_value(userID, i))
+					net_write_client(ds_list_find_value(sockets, i), buffer_u8, 4, buffer_s32, id);
+			}
+
 			file_text_write_string(log_file, string(current_hour) + ":" + string(current_minute)+ ":" + string(current_second) + " - " + "User with IP " + ip_address + " has connected to the server.");
 			file_text_writeln(log_file);
 			

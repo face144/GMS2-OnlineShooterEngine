@@ -3,6 +3,7 @@ function net_server_events() {
 	//Gets the data passed in by the connection data. (net_server_connections)
 	var data = argument[0];
 	var socket = argument[1];
+	var client_ID;
 
 	//Reads which event id was sent by the client. (The first data sent from the client)
 	var event = buffer_read(data,buffer_u8);
@@ -19,7 +20,7 @@ function net_server_events() {
 		
 		case 1: //Movement
 			//Read the ID
-			var client_ID = buffer_read(data,buffer_s32);
+		client_ID = buffer_read(data,buffer_s32);
 			//Decodes the movement type
 			switch(buffer_read(data,buffer_u8)) {
 				
@@ -41,9 +42,23 @@ function net_server_events() {
 				case 4:
 					with (client_ID)
 						y += oPlayer.movement_speed;
-				break;				
+				break;
+				}
 				
-			}
+				//Send info to all players (Maybe move code below inside each case above?)
+				var index = ds_list_find_index(userID, client_ID);
+				with(client_ID) {
+					for (var i = 0; i < ds_list_size(sockets); i++) {
+						if (i != index) {
+							var tempSocket = ds_list_find_value(sockets, i)
+							net_write_client(tempSocket, buffer_u8, 3, buffer_s32, client_ID,
+														 buffer_u16, x, buffer_u16, y);
+						
+						}
+					}
+				}
+				
+				
 		break;
 			
 		/*case 2: //Disconnect signal
@@ -60,6 +75,22 @@ function net_server_events() {
 			ds_list_delete(sockets,socketPos);
 			ds_list_delete(userID,socketPos)
 		break;*/
+		
+		case 2: //Shooting
+			client_ID = buffer_read(data,buffer_s32);
+			with(client_ID)
+					var bulletID = instance_create_layer(self.x, self.y, "Instances", oBullet);
 			
+			with (bulletID)
+				direction = buffer_read(data, buffer_s16);
+				break;
+				
+		case 3:
+			if (buffer_read(data, buffer_s16) != connectionKey) {
+				net_write_client(socket, buffer_u8, 6)
+				network_destroy(socket);
+			}
+			break;
+		
 	}
 }
